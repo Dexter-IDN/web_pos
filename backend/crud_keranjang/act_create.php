@@ -15,7 +15,27 @@ try {
             </script>        
         ";
     } else {
-        $query = "INSERT INTO keranjang(kode_produk, harga_jual, jumlah, username) VALUE('$kodeProduk', '$hargaJual', '$jumlah', '')";
+        $queryCheck = "SELECT keranjang.*, produk.stok FROM produk JOIN keranjang ON keranjang.kode_produk=produk.kode_produk WHERE keranjang.kode_produk='$kodeProduk'";
+        $resultCheck = mysqli_query($connection, $queryCheck);
+        $dataCheck = mysqli_fetch_assoc($resultCheck);
+
+        if ($kodeProduk != $dataCheck['kode_produk']) {
+            $query = "INSERT INTO keranjang(kode_produk, harga_jual, jumlah, username) VALUE('$kodeProduk', '$hargaJual', '$jumlah', '')";
+        } else {
+            if ($dataCheck['jumlah'] + $jumlah > $dataCheck['stok']) {
+                echo "
+                    <script>
+                        alert('Jumlah di dalam keranjang tidak boleh melebihi stok yang tersedia');
+                        history.go(-1);
+                    </script>
+                ";
+
+                exit;
+            } else {
+                $query = "UPDATE keranjang SET jumlah=jumlah+$jumlah WHERE kode_produk='$kodeProduk'";
+            }
+        }
+
         $result = mysqli_query($connection, $query);
     
         if ($result) {

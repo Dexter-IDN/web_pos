@@ -60,7 +60,7 @@
             </tbody>
         </table>
         <table border="1" cellpadding="10" cellspacing="0">
-            <form action="" method="get">
+            <form action="../../backend/crud_penjualan/act_create.php" method="get">
 
                 <thead>
                     <tr>
@@ -89,13 +89,13 @@
                                 <tr>
                                     <td>$noKeranjang</td>
                                     <td>
-                                        <input type='hidden' name='kode_produk' value='$dataKeranjang[kode_produk]'>$dataKeranjang[nama_produk]
+                                        <input type='hidden' name='kode_produk[]' value='$dataKeranjang[kode_produk]'>$dataKeranjang[nama_produk]
                                     </td>
                                     <td>
-                                        <input type='hidden' name='harga_jual' value='$dataKeranjang[harga_jual]'>Rp $dataKeranjang[harga_jual]
+                                        <input type='hidden' name='harga_jual[]' value='$dataKeranjang[harga_jual]'>Rp $dataKeranjang[harga_jual]
                                     </td>
                                     <td>
-                                        <input type='hidden' name='jumlah' value='$dataKeranjang[jumlah]'>$dataKeranjang[jumlah]
+                                        <input type='hidden' name='jumlah[]' value='$dataKeranjang[jumlah]'>$dataKeranjang[jumlah]
                                     </td>
                                     <td>Rp $subtotal</td>
                                     <td>
