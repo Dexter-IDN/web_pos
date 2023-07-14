@@ -6,6 +6,7 @@ try {
     $hargaJual = $_GET['harga_jual'];
     $stok = $_GET['stok'];
     $jumlah = $_GET['jumlah'];
+    $username = $_GET['kasir'];
 
     if ($jumlah > $stok) {
         echo "
@@ -20,7 +21,7 @@ try {
         $dataCheck = mysqli_fetch_assoc($resultCheck);
 
         if ($kodeProduk != $dataCheck['kode_produk']) {
-            $query = "INSERT INTO keranjang(kode_produk, harga_jual, jumlah, username) VALUE('$kodeProduk', '$hargaJual', '$jumlah', '')";
+            $query = "INSERT INTO keranjang(kode_produk, harga_jual, jumlah, username) VALUE('$kodeProduk', '$hargaJual', '$jumlah', '$username')";
         } else {
             if ($dataCheck['jumlah'] + $jumlah > $dataCheck['stok']) {
                 echo "

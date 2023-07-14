@@ -1,3 +1,12 @@
+<?php 
+    session_start();
+
+    if (!isset($_SESSION['login']) && !$_SESSION['login']) {
+        header('location: ../../index.php');
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +16,15 @@
     <title>Kategori Produk</title>
 </head>
 <body>
+    <nav style="padding-bottom: 20px;">
+        <h3>Menu</h3>
+        <a href="../kasir/kasir.php">Kasir</a>
+        <a href="kategori.php">Kategori</a>
+        <a href="../produk/produk.php">Produk</a>
+        <a href="../penjualan/penjualan.php">Penjualan</a>
+        <?= ($_SESSION['role'] == 'admin') ? "<a href='../users/users.php'>Users</a>" : '' ?>
+        <button><a href="../../backend/auth/logout.php?logout">Logout</a></button>
+    </nav>
     <button><a href="create_kategori.php">Tambah Kategori</a></button>
     <br><br>
     <table border="1" cellpadding="10" cellspacing="0">

@@ -1,6 +1,22 @@
 <?php 
     require_once('../../backend/lib/conn_db.php');
 
+    session_start();
+
+    if (!isset($_SESSION['login']) && !$_SESSION['login']) {
+        header('location: ../../index.php');
+        exit;
+    }
+
+    if ($_SESSION['role'] != 'admin') {
+        echo "
+            <script>
+                alert('Anda tidak punya akses untuk ini');
+                window.location = '../kasir/kasir.php';
+            </script>
+        ";
+    }
+
     $id = $_GET['user'];
 
     $query = "SELECT * FROM users WHERE id='$id'";

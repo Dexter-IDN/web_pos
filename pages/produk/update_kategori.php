@@ -1,6 +1,13 @@
 <?php 
     require_once('../../backend/lib/conn_db.php');
 
+    session_start();
+
+    if (!isset($_SESSION['login']) && !$_SESSION['login']) {
+        header('location: ../../index.php');
+        exit;
+    }
+
     $kodeProduk = $_GET['kode'];
 
     $queryProduk = "SELECT * FROM produk WHERE kode_produk='$kodeProduk'";

@@ -1,5 +1,12 @@
 <?php 
     require_once('../../backend/lib/conn_db.php');
+
+    session_start();
+
+    if (!isset($_SESSION['login']) && !$_SESSION['login']) {
+        header('location: ../../index.php');
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +18,15 @@
     <title>Kasir</title>
 </head>
 <body>
+    <nav style="padding-bottom: 20px;">
+        <h3>Menu</h3>
+        <a href="kasir.php">Kasir</a>
+        <a href="../kategori/kategori.php">Kategori</a>
+        <a href="../produk/produk.php">Produk</a>
+        <a href="../penjualan/penjualan.php">Penjualan</a>
+        <?= ($_SESSION['role'] == 'admin') ? "<a href='../users/users.php'>Users</a>" : '' ?>
+        <button><a href="../../backend/auth/logout.php?logout">Logout</a></button>
+    </nav>
     <div style="display: flex;">
         <table border="1" cellpadding="10" cellspacing="0" style="margin-right: 10%;">
             <thead>
@@ -35,6 +51,7 @@
                     while ($dataProduk = mysqli_fetch_assoc($resultProduk)) {
                         echo "
                         <form action='../../backend/crud_keranjang/act_create.php' method='get'>
+                            <input type='hidden' name='kasir' value='$_SESSION[username]'>
                             <tr>
                                 <td>$noProduk</td>
                                 <td>
@@ -98,6 +115,7 @@
                                         <input type='hidden' name='jumlah[]' value='$dataKeranjang[jumlah]'>$dataKeranjang[jumlah]
                                     </td>
                                     <td>Rp $subtotal</td>
+                                    <input type='hidden' name='kasir' value='$dataKeranjang[username]'>
                                     <td>
                                         <a href='update_keranjang.php?id=$dataKeranjang[id]'>Edit</a>
                                         <a href='../../backend/crud_keranjang/act_delete.php?id=$dataKeranjang[id]'>Hapus</a>

@@ -1,5 +1,12 @@
 <?php 
     require_once('../../backend/lib/conn_db.php');
+
+    session_start();
+
+    if (!isset($_SESSION['login']) && !$_SESSION['login']) {
+        header('location: ../../index.php');
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +18,15 @@
     <title>Penjualan</title>
 </head>
 <body>
+    <nav style="padding-bottom: 20px;">
+        <h3>Menu</h3>
+        <a href="../kasir/kasir.php">Kasir</a>
+        <a href="../kategori/kategori.php">Kategori</a>
+        <a href="../produk/produk.php">Produk</a>
+        <a href="penjualan.php">Penjualan</a>
+        <?= ($_SESSION['role'] == 'admin') ? "<a href='../users/users.php'>Users</a>" : '' ?>
+        <button><a href="../../backend/auth/logout.php?logout">Logout</a></button>
+    </nav>
     <div style="display: flex;">
         <table border="1" cellpadding="10" cellspacing="0" style="margin-right: 10%;">
             <thead>

@@ -5,10 +5,11 @@ try {
     $kodeProduk = $_GET['kode_produk'];
     $hargaJual = $_GET['harga_jual'];
     $jumlah = $_GET['jumlah'];
+    $username = $_GET['kasir'];
 
     $kodePenjualan = "P".date('dmyhis');
 
-    $queryPenjualan = "INSERT INTO penjualan(kode_penjualan, username) VALUES('$kodePenjualan', '')";
+    $queryPenjualan = "INSERT INTO penjualan(kode_penjualan, username) VALUES('$kodePenjualan', '$username')";
     $resultPenjualan = mysqli_query($connection, $queryPenjualan);
 
     if ($resultPenjualan) {

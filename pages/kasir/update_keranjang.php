@@ -1,6 +1,13 @@
 <?php 
     require_once('../../backend/lib/conn_db.php');
 
+    session_start();
+
+    if (!isset($_SESSION['login']) && !$_SESSION['login']) {
+        header('location: ../../index.php');
+        exit;
+    }
+
     $id = $_GET['id'];
     
     $query = "SELECT * FROM keranjang WHERE id='$id'";

@@ -7,7 +7,7 @@ try {
     $kategoriProduk = $_GET['kategori'];
     $hargaBeli = $_GET['harga_beli'];
     $hargaJual = $_GET['harga_jual'];
-    $diskonProduk = $_GET['diskon'] / 100;
+    $diskonProduk = ($_GET['diskon'] == null) ? 0 : $_GET['diskon'] / 100;
     $stokProduk = $_GET['stok'];
 
     $query = "INSERT INTO produk(kode_produk, nama_produk, id_kategori, harga_beli, harga_jual, diskon, stok) VALUES('$kodeProduk', '$namaProduk', '$kategoriProduk', '$hargaBeli', '$hargaJual', '$diskonProduk', '$stokProduk')";

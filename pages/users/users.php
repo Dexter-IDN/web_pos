@@ -1,3 +1,21 @@
+<?php 
+    session_start();
+
+    if (!isset($_SESSION['login']) && !$_SESSION['login']) {
+        header('location: ../../index.php');
+        exit;
+    }
+
+    if ($_SESSION['role'] != 'admin') {
+        echo "
+            <script>
+                alert('Anda tidak punya akses untuk ini');
+                window.location = '../kasir/kasir.php';
+            </script>
+        ";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +25,15 @@
     <title>Users</title>
 </head>
 <body>
+    <nav style="padding-bottom: 20px;">
+        <h3>Menu</h3>
+        <a href="../kasir/kasir.php">Kasir</a>
+        <a href="../kategori/kategori.php">Kategori</a>
+        <a href="../produk/produk.php">Produk</a>
+        <a href="../penjualan/penjualan.php">Penjualan</a>
+        <a href="users.php">Users</a>
+        <button><a href="../../backend/auth/logout.php?logout">Logout</a></button>
+    </nav>
     <button><a href="create_user.php">Tambah User</a></button>
     <br><br>
     <table border="1" cellpadding="10" cellspacing="0">

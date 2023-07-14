@@ -1,3 +1,21 @@
+<?php 
+    session_start();
+
+    if (!isset($_SESSION['login']) && !$_SESSION['login']) {
+        header('location: ../../index.php');
+        exit;
+    }
+
+    if ($_SESSION['role'] != 'admin') {
+        echo "
+            <script>
+                alert('Anda tidak punya akses untuk ini');
+                window.location = '../kasir/kasir.php';
+            </script>
+        ";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
